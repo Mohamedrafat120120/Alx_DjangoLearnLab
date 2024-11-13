@@ -14,7 +14,7 @@ def get_all_books_in_library(library_name):
     return []
 def get_author(author):
   try:  
-    author=Author.objects.get(name="michel")
+    author=Author.objects.get(name=author)
     return author
   except Author.DoesNotExist:
       return None
