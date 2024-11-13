@@ -14,12 +14,12 @@ def get_all_books_in_library(library_name):
     return []
 def get_author(author):
   try:  
-    author=Author.objects.get(name=author)
+    author=Author.objects.get(name="michel")
     return author
   except Author.DoesNotExist:
       return None
 def get_book(author):
-    author=get_author("michel")
+    author=get_author(author)
     try:
         book=Book.objects.filter(author=author)
     except Book.DoesNotExist:
