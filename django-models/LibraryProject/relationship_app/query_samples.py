@@ -12,5 +12,6 @@ def get_all_books_in_library(library_name):
     if library:
         return library.books.all()  
     return []
-all_books_specific_author=Book.objects.get(author="michel")
+author=Author.objects.get(name="michel")
+books=Book.objects.filter(author=author)
 librarian=Library.objects.get(name=Librarian.name)
