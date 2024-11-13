@@ -3,6 +3,11 @@ from django.db import models
 # Create your models here.
 class Author(models.Model):
     name=models.CharField(max_length=50)
+    @staticmethod
+    def __str__(self):
+        return self.name
+    
+
 
 class Book(models.Model):
     title = models.CharField(max_length=100)
@@ -14,4 +19,8 @@ class Library(models.Model):
     
 class Librarian(models.Model):
     name=models.CharField(max_length=100)
-    Library=models.OneToOneField(Library,on_delete=models.CASCADE)        
+    Library=models.OneToOneField(Library,on_delete=models.CASCADE)      
+      
+    
+    
+    
