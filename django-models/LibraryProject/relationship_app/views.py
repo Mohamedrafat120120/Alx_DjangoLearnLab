@@ -16,7 +16,7 @@ def list_books(request):
 
 class LibraryDetailView(DetailView):
     model = Library
-    template_name='library_detail.html'
+    template_name='relationship_app/library_detail.html'
 
 
 # class registeration(CreateView):
@@ -34,4 +34,4 @@ def register(request):
       else:
           form=UserCreationForm()
           
-    return render(request,'templates/relationship_app/user_authentication/signup.html',{'form':form})
+    return render(request,'templates/relationship_app/User Authentication/signup.html',{'form':form})
