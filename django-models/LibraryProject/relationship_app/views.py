@@ -10,6 +10,6 @@ def list_all_books(request):
 
 
 
-class list_books(DetailView):
+class LibraryDetailView(DetailView):
     model = Library
     template_name='relationship_app/library_detail.html'
