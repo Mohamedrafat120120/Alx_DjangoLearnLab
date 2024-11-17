@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponseForbidden
 from .models import Book
 from .models import Library
@@ -21,7 +21,7 @@ def list_books(request):
 
 class LibraryDetailView(DetailView):
     model = Library
-    template_name='relationship_app/library_detail.html'
+    template_name='LibraryProject/relationship_app/library_detail.html'
 
 
 # class registeration(CreateView):
@@ -46,10 +46,18 @@ def add_book_per(request):
         book=Book.objects.create(title=request.POST['title'],author=request.POST['author'])
 @permission_required('relationship_app.can_change_book',login_url='login/')
 def change_book_per(request):
-        book=Book.objects.create(title=request.POST['title'],author=request.POST['author'])
+        book=get_object_or_404(Book,pk=id)
+        book.title=request.POST['title']
+        book.author=request.POST['author']
+        book.save()
+        
         
 @permission_required('relationship_app.can_delete_book',login_url='login/')
 def delete_book_per(request):
         
-        book=Book.objects.get(title=request.title)
+        book=get_object_or_404(Book,pk=id)
+        book.delete()
+        return redirect('list_books')
+    
+        
     
