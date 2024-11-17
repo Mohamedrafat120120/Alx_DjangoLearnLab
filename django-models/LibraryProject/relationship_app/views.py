@@ -7,8 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth import login 
-from django.contrib.auth.models import User,Permission
-from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.decorators import permission_required
 
 
 
@@ -42,10 +41,15 @@ def register(request):
           
     return render(request,'templates/relationship_app/User Authentication/signup.html',{'form':form})
 
-
+@permission_required('relationship_app.can_add_book',login_url='login/')
 def add_book_per(request):
-    if not request.user.has_perm('relationship_app.can_add_book'):
-         return HttpResponseForbidden("You do not have permission to add a book.")
-    else:
         book=Book.objects.create(title=request.POST['title'],author=request.POST['author'])
+@permission_required('relationship_app.can_change_book',login_url='login/')
+def change_book_per(request):
+        book=Book.objects.create(title=request.POST['title'],author=request.POST['author'])
+        
+@permission_required('relationship_app.can_delete_book',login_url='login/')
+def delete_book_per(request):
+        
+        book=Book.objects.get(title=request.title)
     
