@@ -12,5 +12,6 @@ urlpatterns = [
     path('logout/',LogoutView.as_view(template_name='logout.html'),name='logout'),
     path('Admin_view/',admin_view.admin,name='Admin_view'),
     path('Librarian_view/',librarian_view.librarian,name='Librarian_view'),
-    path('Member_view/',member_view.member,name='Member_view')
+    path('Member_view/',member_view.member,name='Member_view'),
+    path('add_book_permission',views.add_book_per,name='add_book_permission')
 ]
