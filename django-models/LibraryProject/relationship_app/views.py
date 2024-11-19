@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponseForbidden
-from .models import Book
+from .models import *
 from .models import Library
 from django.views.generic.detail import DetailView
 from django.contrib.auth.forms import UserCreationForm 
@@ -14,6 +14,11 @@ from django.contrib.auth.decorators import permission_required
 # Create your views here.
 def list_books(request):
     books=Book.objects.all()
+    context={'books':books}
+    return render(request,'LibraryProject/templates/relationship_app/list_books.html',context)
+
+def list_books_byspecific_author(request):
+    books=Author.objects.get(name='michel')
     context={'books':books}
     return render(request,'LibraryProject/templates/relationship_app/list_books.html',context)
 
