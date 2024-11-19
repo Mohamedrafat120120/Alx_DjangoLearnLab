@@ -13,7 +13,7 @@ def get_all_books_in_library(library_name):
         return library.books.all()  
     return []
 
-author=Author.objects.get(name="michel")
+Authors=Author.objects.get(name="michel")
 books=Book.objects.filter(author=author)
   
 librarian=Library.objects.get(name=Librarian.name)
