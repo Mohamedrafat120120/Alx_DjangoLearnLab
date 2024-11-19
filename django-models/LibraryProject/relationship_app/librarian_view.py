@@ -1,9 +1,11 @@
-from django.http import HttpResponse
+from .models import UserProfile
+from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import user_passes_test
 
+
 def is_librarian(user):
-    return user.groups.filter(name='Librarian').exists()
+    return UserProfile.User=='Librarian'
 
 @user_passes_test(is_librarian)
-def librarian_view(request):
-    return HttpResponse("Welcome, Librarian!")
+def librarian(request):
+    return render(request,'librarian.html')
