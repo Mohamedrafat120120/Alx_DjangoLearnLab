@@ -17,11 +17,6 @@ def list_books(request):
     context={'books':books}
     return render(request,'LibraryProject/templates/relationship_app/list_books.html',context)
 
-def list_books_byspecific_author(request):
-    books=Author.objects.get(name='michel')
-    context={'books':books}
-    return render(request,'LibraryProject/templates/relationship_app/list_books.html',context)
-
 
 
 class LibraryDetailView(DetailView):
