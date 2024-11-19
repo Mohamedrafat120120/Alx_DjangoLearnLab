@@ -39,7 +39,7 @@ def register(request):
       else:
           form=UserCreationForm()
           
-    return render(request,'templates/relationship_app/User Authentication/signup.html',{'form':form})
+    return render(request,'Alx_DjangoLearnLab/django-models/LibraryProject/relationship_app/User_Authentication/signup.html',{'form':form})
 
 @permission_required('relationship_app.can_add_book',login_url='login/')
 def add_book_per(request):
