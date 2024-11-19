@@ -12,8 +12,16 @@ def get_all_books_in_library(library_name):
     if library:
         return library.books.all()  
     return []
-
-Authors=Author.objects.get(name="michel")
-books=Book.objects.filter(author=author)
-  
+def get_author(author):
+  try:  
+    author=Author.objects.get(name="michel")
+    return author
+  except Author.DoesNotExist:
+      return None
+def get_book(author):
+    author=get_author(author)
+    try:
+        book=Book.objects.filter(author=author)
+    except Book.DoesNotExist:
+        return None
 librarian=Library.objects.get(name=Librarian.name)
