@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin 
 from .models import Book,CustomUser
 # Register your models here.
-class CustomUserAdmin(admin.ModelAdmin):
+class CustomUserAdmin(UserAdmin):
     
     model = CustomUser
     list_display = [
@@ -15,4 +15,4 @@ class  BookAdmin(admin.ModelAdmin):
     search_fields=['title']
 
 admin.site.register(Book,BookAdmin)
-admin.site.register(CustomUser,CustomUserAdmin)
+admin.site.register(CustomUser, CustomUserAdmin)
