@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser,UserManager
+from django.contrib.auth.models import AbstractUser,BaseUserManager
 
 # Create your models here.
 class Book(models.Model):
@@ -13,7 +13,7 @@ class CustomUser(AbstractUser):
         profile_photo=models.ImageField()
         
         
-class MyUserManager(UserManager):
+class CustomUserManager(BaseUserManager):
     def create_user(self,date_of_birth,profile_photo):
         """
         Creates and saves a User with the given email, date of
