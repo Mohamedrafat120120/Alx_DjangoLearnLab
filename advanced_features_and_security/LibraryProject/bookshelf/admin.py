@@ -1,10 +1,10 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin 
-from .models import Book,user
+from .models import Book,CustomUser
 # Register your models here.
 class CustomUserAdmin(UserAdmin):
     
-    model = user
+    model = CustomUser
     list_display = [
         'email', 'username', 'date_of_birth'
     ]
@@ -15,4 +15,4 @@ class  BookAdmin(admin.ModelAdmin):
     search_fields=['title']
 
 admin.site.register(Book,BookAdmin)
-admin.site.register(user,CustomUserAdmin)
+admin.site.register(CustomUser,CustomUserAdmin)
