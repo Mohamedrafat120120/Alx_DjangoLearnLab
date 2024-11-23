@@ -7,6 +7,15 @@ class Book(models.Model):
     author = models.CharField(max_length=100)
     publication_year = models.IntegerField()
     
+    class Meta:
+        permissions=[
+            ("can_view_all_books", "Can view all books"),
+            ("can_add_book", "Can add book"),
+            ("can_edit_all_books", "Can edit all books"),
+            ("can_delete_book", "Can delete book"),
+            
+        ]
+    
     
 class CustomUser(AbstractUser):
         date_of_birth=models.DateField()
