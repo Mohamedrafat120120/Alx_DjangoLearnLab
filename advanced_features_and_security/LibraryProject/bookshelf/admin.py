@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin 
 from .models import Book,CustomUser
-from django.contrib.auth.models import Permission,User
+from django.contrib.auth.models import Permission,User,Group
 from django.contrib.contenttypes.models import ContentType 
 # Register your models here.
 permission=Permission.objects.get('bookshelf.can_view_all_books')
