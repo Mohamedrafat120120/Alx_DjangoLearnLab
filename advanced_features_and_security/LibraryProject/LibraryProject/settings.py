@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-1s@alrhxiol50r6pz=59-_l+!+da2=77*83uxmpma++-u4xe2_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -100,8 +100,11 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-
+CSRF_COOKIE_SECURE=True
+SESSION_COOKIE_SECURE=True
+SECURE_BROWSER_XSS_FILTER=True
+X_FRAME_OPTIONS=True
+SECURE_CONTENT_TYPE_NOSNIFF=True
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
