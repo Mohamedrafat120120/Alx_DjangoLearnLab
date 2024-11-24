@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from bookshelf.models import CustomUser
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 # Create your models here.
@@ -35,16 +35,16 @@ class Librarian(models.Model):
     library=models.OneToOneField(Library,on_delete=models.CASCADE)      
       
 class UserProfile(models.Model):
-    User=models.OneToOneField(User,on_delete=models.CASCADE)
+    user=models.OneToOneField(CustomUser,on_delete=models.CASCADE)
     role=models.CharField(max_length=100,choices=rolechoices)
     
-@receiver(post_save, sender=User)
-def create_user_profile(sender,instance,created, **kwargs):
-        UserProfile.objects.create(User=instance)
+@receiver(post_save, sender=CustomUser)
+def create_CustomUser_profile(sender,instance,created, **kwargs):
+        CustomUserProfile.objects.create(CustomUser=instance)
         
-@receiver(post_save, sender=User)
-def save_user_profile(sender,instance, **kwargs):
-        instance.UserProfile.save()
+@receiver(post_save, sender=CustomUser)
+def save_CustomUser_profile(sender,instance, **kwargs):
+        instance.CustomUserProfile.save()
         
         
         
