@@ -1,7 +1,6 @@
 from django.shortcuts import render
-
+from django.contrib.auth.decorators import permission_required
 # Create your views here.
-
-def index(request):
-    if user.has_perm('bookshelf.can_edit_all_books'):
+@permission_required('bookshelf.can_edit',raise_exception=True)
+def edit(request):
         return render(request, 'bookshelf/index.html')
