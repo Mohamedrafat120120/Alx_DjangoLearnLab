@@ -7,4 +7,9 @@ from .forms import ExampleForm
 def edit(request):
     book_list=Book.objects.all()
     return render(request,'bookshelf/edit.html',{'book_list':book_list})
+
+
+def form(request):
+    
+    return render(request,'bookshelf/form_example.html',{'lf':ExampleForm})
     
