@@ -1,5 +1,5 @@
-from django.shortcuts import render,redirect,get_object_or_404
-from django.http import HttpResponseForbidden
+from django.shortcuts import render,redirect,get_object_or_404,HttpResponse
+from django.contrib.auth.decorators import user_passes_test
 from .models import *
 from .models import Library
 from django.views.generic.detail import DetailView
@@ -58,6 +58,26 @@ def delete_book_per(request):
         book=get_object_or_404(Book,pk=id)
         book.delete()
         return redirect('list_books')
-    
-        
-    
+     
+
+
+def is_admin(user):
+    return hasattr(user, 'userprofile') and user.userprofile.role == 'Admin'
+
+def is_librarian(user):
+    return hasattr(user, 'userprofile') and user.userprofile.role == 'Librarian'
+
+def is_member(user):
+    return hasattr(user, 'userprofile') and user.userprofile.role == 'Member'
+
+@user_passes_test(is_admin)
+def admin_view(request):
+    return HttpResponse("Welcome, Admin!")
+
+@user_passes_test(is_librarian)
+def librarian_view(request):
+    return HttpResponse("Welcome, Librarian!")
+
+@user_passes_test(is_member)
+def member_view(request):
+    return HttpResponse("Welcome, Member!")    
