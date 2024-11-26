@@ -71,13 +71,13 @@ def is_member(user):
     return hasattr(user, 'userprofile') and user.userprofile.role == 'Member'
 
 @user_passes_test(is_admin)
-def admin_view(request):
+def Admin(request):
     return HttpResponse("Welcome, Admin!")
 
 @user_passes_test(is_librarian)
-def librarian_view(request):
+def Librarian(request):
     return HttpResponse("Welcome, Librarian!")
 
 @user_passes_test(is_member)
-def member_view(request):
+def Member(request):
     return HttpResponse("Welcome, Member!")    
