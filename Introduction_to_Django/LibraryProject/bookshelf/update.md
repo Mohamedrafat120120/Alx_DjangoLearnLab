@@ -1,4 +1,4 @@
-Book_update=Book.objects.get(title="1984")
-Book_update.title="Nineteen Eighty-Four"
-Book_update.save()
+book=Book.objects.get(title="1984")
+book.title="Nineteen Eighty-Four"
+book.save()
 #output
