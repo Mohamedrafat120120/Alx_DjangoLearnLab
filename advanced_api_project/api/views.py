@@ -1,9 +1,10 @@
-from django.shortcuts import get_object_or_404 
 from rest_framework import generics 
 from .models import *
 from api.serializer import AuthorSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.filters import SearchFilter, OrderingFilter
+
 
 # Create your views here.
 class Bookviewlist(generics.ListAPIView):
@@ -65,7 +66,7 @@ class Bookviewsearching(generics.ListAPIView):
     authentication_classes=[TokenAuthentication]
     queryset=Book.objects.all()
     serializer_class=AuthorSerializer
-    filter_backends= [filters.SearchFilter]
+    filter_backends= [SearchFilter]
     search_fields=['title','author']
     
     
@@ -74,5 +75,5 @@ class Bookviewordering(generics.ListAPIView):
     authentication_classes=[TokenAuthentication]
     queryset=Book.objects.all()
     serializer_class=AuthorSerializer
-    filter_backends= [filters.OrderingFilter]
-    search_fields=['title','author']
+    filter_backends= [OrderingFilter]
+    ordering_fields=['title','author']
