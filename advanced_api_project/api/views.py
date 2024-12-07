@@ -50,3 +50,29 @@ class Bookviewdelete(generics.DestroyAPIView):
     serializer_class=AuthorSerializer
     
     
+    
+class Bookviewfilter(generics.ListAPIView):
+    permission_classes=[IsAuthenticated]
+    authentication_classes=[TokenAuthentication]
+    serializer_class=AuthorSerializer
+    def get_queryset(self):
+        book=self.kwargs.get('pk')
+        return Book.objects.filter(pk=book)
+    
+    
+class Bookviewsearching(generics.ListAPIView):
+    permission_classes=[IsAuthenticated]
+    authentication_classes=[TokenAuthentication]
+    queryset=Book.objects.all()
+    serializer_class=AuthorSerializer
+    filter_backends= [filters.SearchFilter]
+    search_fields=['title','author']
+    
+    
+class Bookviewordering(generics.ListAPIView):
+    permission_classes=[IsAuthenticated]
+    authentication_classes=[TokenAuthentication]
+    queryset=Book.objects.all()
+    serializer_class=AuthorSerializer
+    filter_backends= [filters.OrderingFilter]
+    search_fields=['title','author']
