@@ -1,9 +1,8 @@
-from rest_framework import generics 
+from rest_framework import generics ,filters
 from .models import *
 from api.serializers import AuthorSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.filters import SearchFilter, OrderingFilter
 from django.views.generic import DetailView
 from django_filters import rest_framework
 
@@ -72,7 +71,7 @@ class Bookviewsearching(generics.ListAPIView):
     authentication_classes=[TokenAuthentication]
     queryset=Book.objects.all()
     serializer_class=AuthorSerializer
-    filter_backends= [SearchFilter]
+    filter_backends= [filters.SearchFilter]
     search_fields=['title','author']
     
     
@@ -81,5 +80,5 @@ class Bookviewordering(generics.ListAPIView):
     authentication_classes=[TokenAuthentication]
     queryset=Book.objects.all()
     serializer_class=AuthorSerializer
-    filter_backends= [OrderingFilter]
+    filter_backends= [filters.OrderingFilter]
     ordering_fields=['title','author']
