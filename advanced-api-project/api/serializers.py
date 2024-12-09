@@ -11,7 +11,7 @@ class BookSerializer(serializers.ModelSerializer):#nested serialization
                     raise serializers.ValidationError('Publication year not valid')
                 return data
 class AuthorSerializer(serializers.ModelSerializer):
-    book=BookSerializer(many=True,read_only=True)
+    book=BookSerializer(many=True, read_only=True)
     class Meta:
         model = Author
         fields = '__all__'
