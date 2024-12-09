@@ -4,6 +4,7 @@ from api.serializers import AuthorSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.filters import SearchFilter, OrderingFilter
+from django.views.generic import DetailView
 
 
 # Create your views here.
