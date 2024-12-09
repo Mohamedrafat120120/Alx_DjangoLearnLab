@@ -1,6 +1,6 @@
 from rest_framework import generics 
 from .models import *
-from api.serializer import AuthorSerializer
+from api.serializers import AuthorSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.filters import SearchFilter, OrderingFilter
