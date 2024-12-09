@@ -5,6 +5,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django.views.generic import DetailView
+from django_filters import rest_framework
+
 
 
 # Create your views here.
