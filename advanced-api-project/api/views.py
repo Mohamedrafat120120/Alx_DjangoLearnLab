@@ -14,6 +14,12 @@ class Bookviewlist(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class=AuthorSerializer
     
+class Bookviewlist(DetailView):
+    permission_classes=[IsAuthenticated]
+    authentication_classes=[TokenAuthentication]
+    queryset = Book.objects.all()
+    serializer_class=AuthorSerializer
+    
 class Bookviewdetail(generics.ListAPIView):
     permission_classes=[IsAuthenticated]
     authentication_classes=[TokenAuthentication]
