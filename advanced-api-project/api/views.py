@@ -18,10 +18,7 @@ class Bookviewdetail(generics.ListAPIView):
     authentication_classes=[TokenAuthentication]
     serializer_class=AuthorSerializer
     
-class Bookviewdetail(generics.ListAPIView):
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [TokenAuthentication]
-    serializer_class = AuthorSerializer
+
 
     def get_queryset(self):
         book_id = self.kwargs.get('pk')  # Extract 'pk' from URL
