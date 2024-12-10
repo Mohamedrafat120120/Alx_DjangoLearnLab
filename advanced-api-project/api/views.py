@@ -18,19 +18,14 @@ class Bookviewlist(generics.ListAPIView):
 class Bookviewlist(DetailView):
     permission_classes=[IsAuthenticated]
     authentication_classes=[TokenAuthentication]
-    queryset = Book.objects.all()
     serializer_class=AuthorSerializer
     
-class Bookviewdetail(generics.ListAPIView):
-    permission_classes=[IsAuthenticated]
-    authentication_classes=[TokenAuthentication]
-    serializer_class=AuthorSerializer
     
-
-
     def get_queryset(self):
         book_id = self.kwargs.get('pk')  # Extract 'pk' from URL
         return Book.objects.filter(pk=book_id)
+    
+
     
 class Bookview(generics.CreateAPIView):
     permission_classes=[IsAuthenticated]
@@ -43,7 +38,6 @@ class Bookview(generics.CreateAPIView):
 class Bookviewupdate(generics.UpdateAPIView):
     permission_classes=[IsAuthenticated]
     authentication_classes=[TokenAuthentication]
-    id=id
     queryset =Book.objects.all()
     serializer_class=AuthorSerializer
     
@@ -51,7 +45,6 @@ class Bookviewupdate(generics.UpdateAPIView):
 class Bookviewdelete(generics.DestroyAPIView):
     permission_classes=[IsAuthenticated]
     authentication_classes=[TokenAuthentication]
-    id=id
     queryset = Book.objects.all()
     serializer_class=AuthorSerializer
     
