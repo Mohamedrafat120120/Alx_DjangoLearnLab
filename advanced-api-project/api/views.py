@@ -1,7 +1,7 @@
 from rest_framework import generics ,filters
 from .models import *
 from api.serializers import AuthorSerializer
-from rest_framework.permissions import IsAuthenticated,IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from django.views.generic import DetailView,CreateView,ListView,UpdateView,DeleteView
 from django_filters import rest_framework
