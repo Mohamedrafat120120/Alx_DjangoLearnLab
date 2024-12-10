@@ -72,7 +72,7 @@ class Bookviewsearching(generics.ListAPIView):
     queryset=Book.objects.all()
     serializer_class=AuthorSerializer
     filter_backends= [filters.SearchFilter]
-    search_fields=['title','author']
+    search_fields=['title','author','publication_year']
     
     
 class Bookviewordering(generics.ListAPIView):
