@@ -3,13 +3,13 @@ from .models import *
 from api.serializers import AuthorSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
-from django.views.generic import DetailView
+from django.views.generic import DetailView,CreateView,ListView,UpdateView,DeleteView
 from django_filters import rest_framework
 
 
 
 # Create your views here.
-class Bookviewlist(generics.ListAPIView):
+class Bookviewlist(ListView):
     permission_classes=[IsAuthenticated]
     authentication_classes=[TokenAuthentication]
     queryset = Book.objects.all()
@@ -27,7 +27,7 @@ class Bookviewlist(DetailView):
     
 
     
-class Bookview(generics.CreateAPIView):
+class Bookview(CreateView):
     permission_classes=[IsAuthenticated]
     authentication_classes=[TokenAuthentication]
     queryset = Book.objects.all()
@@ -35,14 +35,14 @@ class Bookview(generics.CreateAPIView):
     
     
     
-class Bookviewupdate(generics.UpdateAPIView):
+class Bookviewupdate(UpdateView):
     permission_classes=[IsAuthenticated]
     authentication_classes=[TokenAuthentication]
     queryset =Book.objects.all()
     serializer_class=AuthorSerializer
     
     
-class Bookviewdelete(generics.DestroyAPIView):
+class Bookviewdelete(DeleteView):
     permission_classes=[IsAuthenticated]
     authentication_classes=[TokenAuthentication]
     queryset = Book.objects.all()
