@@ -15,7 +15,7 @@ class Bookviewlist(ListView):
     queryset = Book.objects.all()
     serializer_class=AuthorSerializer
     
-class Bookviewlist(DetailView):
+class Bookviewdetaillist(DetailView):
     permission_classes=[IsAuthenticated]
     authentication_classes=[TokenAuthentication]
     serializer_class=AuthorSerializer
@@ -27,7 +27,7 @@ class Bookviewlist(DetailView):
     
 
     
-class Bookview(CreateView):
+class Bookcreateview(CreateView):
     permission_classes=[IsAuthenticated]
     authentication_classes=[TokenAuthentication]
     queryset = Book.objects.all()
