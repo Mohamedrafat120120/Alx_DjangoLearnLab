@@ -9,8 +9,8 @@ urlpatterns = [
     path('home/',home.as_view(),name="home"),
     path('posts/',posts.as_view(),name="posts"),
     path('display/',display.as_view(),name="display"),
-    path('display_create/',display_create.as_view(),name="display_create"),
-    path('display_detail/<int:pk>',display_detail.as_view(),name="display_detail"),
-    path('update_post/',update_post.as_view(),name="update_post"),
-    path('delete_post/',delete_post.as_view(),name="delete_post"),
+    path('post/new/',display_create.as_view(),name="display_create"),
+    path('display_detail/<int:pk>/',display_detail.as_view(),name="display_detail"),
+    path('post/<int:pk>/update/',update_post.as_view(),name="update_post"),
+    path('post/<int:pk>/delete/',delete_post.as_view(),name="delete_post"),
 ]
