@@ -42,7 +42,7 @@ class display_detail(DetailView):
     
 class update_post(UpdateView):
     model=post
-    template_name='blog/display.html'
+    template_name='blog/editing.html'
     fields=['title','content','author']
     success_url=reverse_lazy('display')
     def  form_valid(self, form):
