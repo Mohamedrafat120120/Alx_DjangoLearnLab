@@ -24,14 +24,21 @@ class posts(ListView):
 class display(ListView):
     model=post
     template_name='blog/display.html'
-class display(CreateView):
+    queryset=post.objects.all()
+    context_object_name='post'
+    
+    
+class display_create(CreateView):
     model=post
     template_name='blog/display.html'
+    fields = ['title', 'content', 'author']
+    success_url = reverse_lazy('display')
 class display_detail(DetailView):
     model=post
-    template_name='blog/display.html'
-    def get_context_data(self, **kwargs):
-        return super().get_context_data(**kwargs)
+    template_name='blog/post_detail.html'
+    context_object_name='post'
+    
+   
     
 class update_post(UpdateView):
     model=post
