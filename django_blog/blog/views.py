@@ -27,13 +27,24 @@ class display(ListView):
 class display(CreateView):
     model=post
     template_name='blog/display.html'
-class display(DetailView):
+class display_detail(DetailView):
     model=post
     template_name='blog/display.html'
-class display(UpdateView):
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(**kwargs)
+    
+class update_post(UpdateView):
     model=post
     template_name='blog/display.html'
-class display(DeleteView):
+    fields=['title','content','author']
+    success_url=reverse_lazy('display')
+    def  form_valid(self, form):
+        response=super().form_valid(form)
+        return response
+    
+    
+class delete_post(DeleteView):
     model=post
-    template_name='blog/display.html'
+    template_name='blog/delete.html'
+    success_url='display'
     
