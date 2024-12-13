@@ -18,24 +18,26 @@ class home(TemplateView):
 class posts(ListView):
     model=post
     template_name = 'blog/posts.html'
+    queryset=post.objects.all()
+    context_object_name='post'
     
     
     
 class display(ListView):
     model=post
-    template_name='blog/display.html'
+    template_name='blog/listing.html'
     queryset=post.objects.all()
     context_object_name='post'
     
     
 class display_create(CreateView):
     model=post
-    template_name='blog/display.html'
+    template_name='blog/creating.html'
     fields = ['title', 'content', 'author']
-    success_url = reverse_lazy('display')
+    success_url = reverse_lazy('listing')
 class display_detail(DetailView):
     model=post
-    template_name='blog/post_detail.html'
+    template_name='blog/viewing.html'
     context_object_name='post'
     
    
@@ -44,7 +46,7 @@ class update_post(UpdateView):
     model=post
     template_name='blog/editing.html'
     fields=['title','content','author']
-    success_url=reverse_lazy('display')
+    success_url=reverse_lazy('listing')
     def  form_valid(self, form):
         response=super().form_valid(form)
         return response
@@ -52,6 +54,6 @@ class update_post(UpdateView):
     
 class delete_post(DeleteView):
     model=post
-    template_name='blog/delete.html'
-    success_url='display'
+    template_name='blog/deleting.html'
+    success_url='listing'
     
