@@ -6,35 +6,20 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Django Blog login{% endblock %}</title>
+        <title>{% block title %}Django Blog Register{% endblock %}</title>
         
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     
     {% block content %}
-        <form method='POST'>
-            {% csrf_token %}
-            <label for="first_name">first_name</label>
-        </br>
-            <input type='text'/>
-        </br>
-            <label for="last_name">last_name</label>
-        </br>
-            <input type='text'/>
-        </br>
-            <label for="email">email</label>
-        </br>
-            <input type='email'/>
-        </br>
-            <label for="new_password">new_password</label>
-        </br>
-            <input type='text'/>
-        </br>
-            <label for="new_password">new_password</label>
-        </br>
-            <input type='text'/>
-        </form>
+    <h2>Register</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+    
         {% endblock %}
 
 </body>

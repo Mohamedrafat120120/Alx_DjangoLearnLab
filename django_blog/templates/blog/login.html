@@ -10,17 +10,13 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    
-        <form method='POST'>
-            {% csrf_token %}
-            <label for="username">username</label>
-        </br>
-            <input type='text'/>
-        </br>
-            <label for="password">password</label>
-        </br>
-            <input type='text'/>
-        </form>
+    <h2>Login</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+
         
 
 </body>

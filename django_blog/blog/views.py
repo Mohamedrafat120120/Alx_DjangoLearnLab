@@ -2,13 +2,30 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views.generic import CreateView,ListView,DeleteView,DetailView,UpdateView,TemplateView
 from .models import post
-class register(CreateView):
-    form_class = UserCreationForm
-    success_url = reverse_lazy('blog/login')
-    template_name = 'blog/register.html'
-    
-class profile(TemplateView):
-    template_name = 'blog/profile.html'
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .forms import CustomUserCreationForm
+from django.contrib.auth.models import User
+
+def register(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'blog/register.html', {'form': form})
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        user = request.user
+        user.email = request.POST.get('email', user.email)
+        user.save()
+        return redirect('profile')
+    return render(request, 'blog/profile.html', {'user': request.user})
+
     
     
 class home(TemplateView):
