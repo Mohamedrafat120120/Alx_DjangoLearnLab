@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.authtoken.views import ObtainAuthToken,Token
+from rest_framework.authtoken.views import Token
 from rest_framework.authentication import authenticate
 # Create your views here.
 class register(APIView):

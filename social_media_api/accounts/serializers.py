@@ -1,5 +1,6 @@
 from .models import MyUser
 from rest_framework import serializers
+from rest_framework.authtoken.views import Token
 
 class registerserializer(serializers.ModelSerializer):
     class Meta:
