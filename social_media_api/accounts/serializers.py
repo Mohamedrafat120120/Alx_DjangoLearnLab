@@ -6,15 +6,15 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-password = serializers.CharField(write_only=True)
 class registerserializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
 
     class Meta:
         model=MyUser
         fields="__all__"
         def create(self, validated_data):
         # Use create_user to hash the password and create the user
-          user = MyUser.objects.create_user(
+          user = User.objects.create_user(
             username=validated_data['username'],
             email=validated_data['email'],
             password=validated_data['password']
