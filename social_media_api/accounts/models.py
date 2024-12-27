@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractUser,AbstractBaseUser, BaseUserManager
 
 
 class MyUserManager(BaseUserManager):
@@ -30,7 +30,7 @@ class MyUser(AbstractBaseUser):
     first_name = models.CharField(max_length=30, blank=True)
     last_name = models.CharField(max_length=30, blank=True)
     bio=models.TextField(max_length=255)
-    picture=models.ImageField(upload_to='accounts/y/m/%d')
+    profile_picture=models.ImageField(upload_to='accounts/y/m/%d')
     followers=models.ManyToManyField('self',symmetrical=False)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
