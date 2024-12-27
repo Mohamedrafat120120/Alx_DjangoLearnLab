@@ -21,7 +21,7 @@ from django.conf import settings
 from rest_framework.authtoken.views import ObtainAuthToken
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api',ObtainAuthToken.as_view(),name='api_token'),
+    path('api/',ObtainAuthToken.as_view(),name='api_token'),
     path('',include('accounts.urls')),
 ]
 if settings.DEBUG:
