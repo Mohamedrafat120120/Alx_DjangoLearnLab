@@ -11,11 +11,12 @@ from rest_framework.authentication import authenticate
 # Create your views here.
 class register(APIView):
     def post(self, request):
-        if not MyUser.objects.filter(user=request.data['email']).exists:
+        if not MyUser.objects.filter(email=request.data['email']).exists():
             serializer = registerserializer(data=request.data)
             if serializer.is_valid():
-                serializer.save()
-                return Response({'Massege':'Account Created','Data':serializer.data}, status=status.HTTP_201_CREATED)
+                user=serializer.save()
+                token= Token.objects.get_or_create(user=user)
+                return Response({'Massege':'Account Created','Data':serializer.data,'Token':token}, status=status.HTTP_201_CREATED)
             
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
