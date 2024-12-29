@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',ObtainAuthToken.as_view(),name='api_token'),
     path('',include('accounts.urls')),
-    # path('',include('posts.urls')),
+    path('',include('posts.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

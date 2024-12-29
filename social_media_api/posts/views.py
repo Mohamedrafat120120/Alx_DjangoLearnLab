@@ -12,17 +12,33 @@ class view_posts(viewsets.ModelViewSet):
     authentication_classes=[TokenAuthentication]
     serializer_class=post_serializer
     def get_queryset(self):
-        posts=self.kwargs.get(id)
-        return post.objects.get(author=posts)
+        return Post.objects.filter(author=self.request.user)
     
     
-class view_posts(viewsets.ModelViewSet):
+class view_comments(viewsets.ModelViewSet):
     permission_classes=[IsAuthenticated]
     authentication_classes=[TokenAuthentication]
-    serializer_class=post_serializer
+    serializer_class=comment_serializer
     def get_queryset(self):
-        posts=self.kwargs.get('user')
-        return Post.objects.get(author=posts)
+        return Comment.objects.filter(author=self.request.user)
+    
+    
+    
+class edit_post(viewsets.ModelViewSet):
+    permission_classes=[IsAuthenticated]
+    authentication_classes=[TokenAuthentication]
+    serializer_class=comment_serializer
+    def get_queryset(self):
+        return Comment.objects.filter(author=self.request.user)
+    
+    
+    
+class edit_comment(viewsets.ModelViewSet):
+    permission_classes=[IsAuthenticated]
+    authentication_classes=[TokenAuthentication]
+    serializer_class=comment_serializer
+    def get_queryset(self):
+        return Comment.objects.filter(author=self.request.user)
     
     
 

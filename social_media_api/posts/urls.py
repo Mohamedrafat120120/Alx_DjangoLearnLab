@@ -1,5 +1,12 @@
-from django.urls import path
+from django.urls import path,include
 from .views import *
+from rest_framework.routers import DefaultRouter
+
+router=DefaultRouter()
+router.register(r'Post',view_posts)
+comment_router=DefaultRouter()
+comment_router.register(r'Commit',view_comments)
 urlpatterns = [
-    path('view_posts/<int:user>/',view_posts.as_view() , name='view-user-posts'),
+    path('view-user-posts/',include(router.urls)),
+    path('view-user-comments/',include(comment_router.urls)),
 ]
