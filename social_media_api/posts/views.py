@@ -10,17 +10,19 @@ from rest_framework.authentication import TokenAuthentication
 class view_posts(viewsets.ModelViewSet):
     permission_classes=[IsAuthenticated]
     authentication_classes=[TokenAuthentication]
+    queryset=Post.objects.all()
     serializer_class=post_serializer
-    def get_queryset(self):
-        return Post.objects.filter(author=self.request.user)
+    # def get_queryset(self):
+    #     return Post.objects.filter(author=self.request.user)
     
     
 class view_comments(viewsets.ModelViewSet):
     permission_classes=[IsAuthenticated]
     authentication_classes=[TokenAuthentication]
     serializer_class=comment_serializer
-    def get_queryset(self):
-        return Comment.objects.filter(author=self.request.user)
+    queryset=Comment.objects.all()
+    # def get_queryset(self):
+    #     return Comment.objects.filter(author=self.request.user)
     
     
     
