@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from .models import MyUser
 from .serializers import *
 from rest_framework import status
@@ -41,3 +41,28 @@ class profile(APIView):
         user = request.user
         serializer = profileserializer(user,many=False)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    
+    
+class follow_user(APIView):
+    permission_classes=[IsAuthenticated]
+    authentication_classes=[TokenAuthentication]
+    def post(self,request,username):
+      target_user=get_object_or_404(MyUser,username=username)
+      user=request.user
+      if target_user != user and target_user not in user.following.all():
+          user.following.add(target_user)
+          return Response({"massege":"following success"},status=status.HTTP_202_ACCEPTED)
+      return Response ({"massege":"you are already following other"},status=status.HTTP_400_BAD_REQUEST)   
+  
+       
+class unfollow_user(APIView):
+    permission_classes=[IsAuthenticated]
+    authentication_classes=[TokenAuthentication]
+    def post(self,request,username):
+      target_user=get_object_or_404(MyUser,username=username)
+      user=request.user
+      if  target_user  in user.following.all():
+          user.following.remove(target_user)
+          return Response({"massege":"unfollowing success"},status=status.HTTP_202_ACCEPTED)
+      return Response ({"massege":"you are already unfollowing "},status=status.HTTP_400_BAD_REQUEST)        

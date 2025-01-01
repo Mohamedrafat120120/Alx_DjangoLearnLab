@@ -4,6 +4,8 @@ from .models import *
 urlpatterns = [
     path('register/',register.as_view(),name='register'),
     path('login/',login.as_view(),name='login'),
-    path('profile/',profile.as_view(),name='profile')
+    path('profile/',profile.as_view(),name='profile'),
+    path('follow_user/<str:username>',follow_user.as_view(),name="follow_user"),
+    path('unfollow_user/<str:username>',unfollow_user.as_view(),name="unfollow_user")
     
 ]
