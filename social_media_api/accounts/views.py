@@ -2,10 +2,9 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate
 from .models import MyUser
 from .serializers import *
-from rest_framework import status,generics
+from rest_framework import status,generics,permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import Token
 # Create your views here.
@@ -42,7 +41,7 @@ class login(APIView):
             return Response(serialize.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class profile(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     authentication_classes = [TokenAuthentication]
     def get(self,request):
         user = request.user
@@ -51,7 +50,7 @@ class profile(APIView):
     
     
 class FollowUserView(generics.GenericAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     authentication_classes = [TokenAuthentication]
 
     def post(self, request, *args, **kwargs):
@@ -69,7 +68,7 @@ class FollowUserView(generics.GenericAPIView):
         return Response({"success": "You are now following this user."}, status=status.HTTP_200_OK)
 
 class FollowUserView(generics.GenericAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [perIsAuthenticated]
     authentication_classes = [TokenAuthentication]
 
     def post(self, request, *args, **kwargs):
