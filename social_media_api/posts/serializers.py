@@ -11,3 +11,5 @@ class comment_serializer(serializers.ModelField):
     class Meta:
         model = Comment
         fields = '__all__'
+        
+        
