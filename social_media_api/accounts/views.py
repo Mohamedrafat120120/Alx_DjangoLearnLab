@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate
 from .models import MyUser
 from .serializers import *
-from rest_framework import status
+from rest_framework import status,generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
@@ -51,25 +51,55 @@ class profile(APIView):
     
     
     
-class follow_user(APIView):
-    permission_classes=[IsAuthenticated]
-    authentication_classes=[TokenAuthentication]
-    def post(self,request,user_id):
-      target_user=get_object_or_404(MyUser,id=user_id)
-      user=request.user
-      if target_user != user and target_user not in user.following.all():
-          user.following.add(target_user)
-          return Response({"massege":"following success"},status=status.HTTP_202_ACCEPTED)
-      return Response ({"massege":"you are already following other"},status=status.HTTP_400_BAD_REQUEST)   
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.response import Response
+from rest_framework import status
+from django.shortcuts import get_object_or_404
+
+class FollowUserView(generics.GenericAPIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def post(self, request, *args, **kwargs):
+        target_user_id = self.kwargs.get('user_id')
+        target_user = get_object_or_404(MyUser, id=target_user_id)
+        user = request.user
+
+        if target_user == user:
+            return Response({"error": "You cannot follow yourself."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if target_user in user.following.all():
+            return Response({"error": "You are already following this user."}, status=status.HTTP_400_BAD_REQUEST)
+
+        user.following.add(target_user)
+        return Response({"success": "You are now following this user."}, status=status.HTTP_200_OK)
+
+            
+        
+       
   
        
-class unfollow_user(APIView):
-    permission_classes=[IsAuthenticated]
-    authentication_classes=[TokenAuthentication]
-    def post(self,request,user_id):
-      target_user=get_object_or_404(MyUser,id=user_id)
-      user=request.user
-      if  target_user  in user.following.all():
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.response import Response
+from rest_framework import status
+from django.shortcuts import get_object_or_404
+
+class FollowUserView(generics.GenericAPIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def post(self, request, *args, **kwargs):
+        target_user_id = self.kwargs.get('user_id')
+        target_user = get_object_or_404(MyUser, id=target_user_id)
+        user = request.user
+        if target_user in user.following.all():
+
           user.following.remove(target_user)
-          return Response({"massege":"unfollowing success"},status=status.HTTP_202_ACCEPTED)
-      return Response ({"massege":"you are already unfollowing "},status=status.HTTP_400_BAD_REQUEST)        
+          return Response({"success": "You are now unfollowing this user."}, status=status.HTTP_200_OK)
+        else:
+            return Response({"error": "You are already not following this user."}, status=status.HTTP_400)
+       
