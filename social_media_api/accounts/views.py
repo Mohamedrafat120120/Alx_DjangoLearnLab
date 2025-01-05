@@ -50,14 +50,6 @@ class profile(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     
-    
-from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.response import Response
-from rest_framework import status
-from django.shortcuts import get_object_or_404
-
 class FollowUserView(generics.GenericAPIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
@@ -75,18 +67,6 @@ class FollowUserView(generics.GenericAPIView):
 
         user.following.add(target_user)
         return Response({"success": "You are now following this user."}, status=status.HTTP_200_OK)
-
-            
-        
-       
-  
-       
-from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.response import Response
-from rest_framework import status
-from django.shortcuts import get_object_or_404
 
 class FollowUserView(generics.GenericAPIView):
     permission_classes = [IsAuthenticated]
