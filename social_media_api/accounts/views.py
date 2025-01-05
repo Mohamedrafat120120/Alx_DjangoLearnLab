@@ -52,7 +52,7 @@ class profile(APIView):
 class FollowUserView(generics.GenericAPIView):
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = [TokenAuthentication]
-
+    queryset=MyUser.objects.all()
     def post(self, request, *args, **kwargs):
         target_user_id = self.kwargs.get('user_id')
         target_user = get_object_or_404(MyUser, id=target_user_id)
@@ -68,9 +68,9 @@ class FollowUserView(generics.GenericAPIView):
         return Response({"success": "You are now following this user."}, status=status.HTTP_200_OK)
 
 class FollowUserView(generics.GenericAPIView):
-    permission_classes = [perIsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     authentication_classes = [TokenAuthentication]
-
+    queryset=MyUser.objects.all()
     def post(self, request, *args, **kwargs):
         target_user_id = self.kwargs.get('user_id')
         target_user = get_object_or_404(MyUser, id=target_user_id)
