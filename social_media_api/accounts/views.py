@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate
-from .models import MyUser
+from .models import CustomUser
 from .serializers import *
 from rest_framework import status,generics,permissions
 from rest_framework.response import Response
@@ -12,7 +12,7 @@ class register(APIView):
     def post(self, request):
         serializer = registerserializer(data=request.data)
         if serializer.is_valid():
-          if not MyUser.objects.filter(email=request.data['email']).exists():
+          if not CustomUser.objects.filter(email=request.data['email']).exists():
                 user=serializer.save()
                 token= Token.objects.get_or_create(user=user)
                 return Response({'Massege':'Account Created','Data':serializer.data,'Token':token}, status=status.HTTP_201_CREATED)
@@ -32,7 +32,7 @@ class login(APIView):
            user = authenticate(username=email, password=password)
            if user:
                token= Token.objects.get_or_create(user=user)
-               User=MyUser.objects.get(email=serialize.data.get('email'))
+               User=CustomUser.objects.get(email=serialize.data.get('email'))
                user_serialize=profileserializer(User,many=False)
                return Response({'Massege':'Login Successfull',"user":user_serialize.data,'Token':token.key,}, status=status.HTTP_200_OK)
            else:
@@ -49,13 +49,13 @@ class profile(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     
-class FollowUserView(generics.GenericAPIView):
+class follow_user(generics.GenericAPIView):
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = [TokenAuthentication]
-    queryset=MyUser.objects.all()
+    queryset=CustomUser.objects.all()
     def post(self, request, *args, **kwargs):
         target_user_id = self.kwargs.get('user_id')
-        target_user = get_object_or_404(MyUser, id=target_user_id)
+        target_user = get_object_or_404(CustomUser, id=target_user_id)
         user = request.user
 
         if target_user == user:
@@ -67,13 +67,13 @@ class FollowUserView(generics.GenericAPIView):
         user.following.add(target_user)
         return Response({"success": "You are now following this user."}, status=status.HTTP_200_OK)
 
-class FollowUserView(generics.GenericAPIView):
+class unfollow_user(generics.GenericAPIView):
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = [TokenAuthentication]
-    queryset=MyUser.objects.all()
+    queryset=CustomUser.objects.all()
     def post(self, request, *args, **kwargs):
         target_user_id = self.kwargs.get('user_id')
-        target_user = get_object_or_404(MyUser, id=target_user_id)
+        target_user = get_object_or_404(CustomUser, id=target_user_id)
         user = request.user
         if target_user in user.following.all():
 
