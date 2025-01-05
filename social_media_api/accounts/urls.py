@@ -6,6 +6,6 @@ urlpatterns = [
     path('login/',login.as_view(),name='login'),
     path('profile/',profile.as_view(),name='profile'),
     path('follow/<int:user_id>',follow_user.as_view(),name="follow_user"),
-    path('unfollow/<str:user_id>/',unfollow_user.as_view(),name="unfollow_user")
+    path('unfollow/<int:user_id>/',unfollow_user.as_view(),name="unfollow_user")
     
 ]
