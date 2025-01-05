@@ -9,4 +9,5 @@ comment_router.register(r'Commit',view_comments)
 urlpatterns = [
     path('view-user-posts/',include(router.urls)),
     path('view-user-comments/',include(comment_router.urls)),
+    path('feed/<int:user_id>/',feed.as_view(),name="feed")
 ]

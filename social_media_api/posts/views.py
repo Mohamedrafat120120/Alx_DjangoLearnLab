@@ -48,11 +48,9 @@ class feed(APIView):
     permission_classes=[permissions.IsAuthenticated]
     authentication_classes=[TokenAuthentication]
     def get(self,request,user_id):
-        target_user=CustomUser.objects.filter(id=user_id)
-        user=request.user
-        if target_user in user.following.all():
-          posts=Post.objects.filter(author=user_id).order_by('created_at')
-          serialize=post_serializer(post_serializer)
+          user=request.user
+          following_users=user.following.all()
+          posts=Post.objects.filter(author__in=following_users).order_by('created_at')
+          serialize=post_serializer(posts)
           return Response(serialize.data,status=status.HTTP_200_OK)
-        else:
-            return Response({"error":"you are not follow this user"},status=status.HTTP_400_BAD_REQUEST)
+ 
