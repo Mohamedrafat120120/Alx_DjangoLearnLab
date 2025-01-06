@@ -28,6 +28,7 @@ urlpatterns = [
     path('api/Refresh',TokenRefreshView.as_view(),name='api_token_Refresh'),
     path('',include('accounts.urls')),
     path('',include('posts.urls')),
+    path('',include('notifications.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

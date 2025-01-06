@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
     # 'rest_framework.authtoken',
     'posts',
-    'rest_framework_simplejwt'
+    'rest_framework_simplejwt',
+    'notifications'
     
 ]
 
@@ -87,6 +88,7 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL ='accounts.CustomUser'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -145,4 +147,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-AUTH_USER_MODEL = 'accounts.CustomUser'
