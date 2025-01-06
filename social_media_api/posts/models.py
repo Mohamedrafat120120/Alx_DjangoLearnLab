@@ -19,6 +19,6 @@ class Comment(models.Model):
     
     
     
-class like(models.Model):
+class Like(models.Model):
     post=models.ForeignKey(Post,on_delete=models.CASCADE)
     user=models.ForeignKey(CustomUser,on_delete=models.CASCADE)    
