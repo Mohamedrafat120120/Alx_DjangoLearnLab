@@ -1,9 +1,9 @@
-from django.shortcuts import render
-from rest_framework import viewsets,status,permissions
+from django.shortcuts import get_object_or_404
+from rest_framework import viewsets,status,permissions,generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import Post,Comment
-from .serializers import post_serializer,comment_serializer
+from .models import Post,Comment,Like
+from .serializers import post_serializer,comment_serializer,likeserializer
 from rest_framework.authentication import TokenAuthentication
 from accounts.models import CustomUser
 # Create your views here.
@@ -54,3 +54,22 @@ class feed(APIView):
           serialize=post_serializer(posts)
           return Response(serialize.data,status=status.HTTP_200_OK)
  
+ 
+class like(generics.GenericAPIView):
+    permission_classes=[permissions.IsAuthenticated]
+    authentication_classes=[TokenAuthentication]
+    def get(self,request,post_id):
+        post=get_object_or_404(Post,pk=post_id)
+        user=request.user
+        like=Like.objects.create(post=post,user=user)
+        like_serializer=likeserializer(like,many=False)
+        return Response(like_serializer.data,status=status.HTTP_200_OK)
+    
+    
+    
+    
+    
+    
+    
+        
+        
