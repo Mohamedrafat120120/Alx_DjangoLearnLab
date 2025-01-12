@@ -6,6 +6,7 @@ from .models import Post,Comment,Like
 from .serializers import post_serializer,comment_serializer,likeserializer
 from rest_framework.authentication import TokenAuthentication
 from accounts.models import CustomUser
+from notifications.models import Notification
 # Create your views here.
 class view_posts(viewsets.ModelViewSet):
     permission_classes=[permissions.IsAuthenticated]
@@ -59,11 +60,14 @@ class like(generics.GenericAPIView):
     permission_classes=[permissions.IsAuthenticated]
     authentication_classes=[TokenAuthentication]
     def get(self,request,post_id):
-        post=get_object_or_404(Post,pk=post_id)
+        post=generics.get_object_or_404(Post,pk=post_id)
         user=request.user
-        like=Like.objects.create(post=post,user=user)
+        like=Like.objects.get_or_create(post=post,user=user)
         like_serializer=likeserializer(like,many=False)
         return Response(like_serializer.data,status=status.HTTP_200_OK)
+    
+    
+    
     
     
     
