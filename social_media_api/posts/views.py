@@ -60,7 +60,7 @@ class like(generics.GenericAPIView):
     permission_classes=[permissions.IsAuthenticated]
     authentication_classes=[TokenAuthentication]
     def get(self,request,pk):
-        post=generics.get_object_or_404(Post,pk=pk)
+        post=generics.get_object_or_404(post,pk=pk)
         user=request.user
         like=Like.objects.get_or_create(user=request.user,post=post)
         notify=Notification.objects.create()
