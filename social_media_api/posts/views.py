@@ -59,10 +59,11 @@ class feed(APIView):
 class like(generics.GenericAPIView):
     permission_classes=[permissions.IsAuthenticated]
     authentication_classes=[TokenAuthentication]
-    def get(self,request,post_id):
-        post=generics.get_object_or_404(Post,pk=post_id)
+    def get(self,request,pk):
+        post=generics.get_object_or_404(Post,pk=pk)
         user=request.user
-        like=Like.objects.get_or_create(post=post,user=user)
+        like=Like.objects.get_or_create(user=request.user,post=post)
+        notify=Notification.objects.create()
         like_serializer=likeserializer(like,many=False)
         return Response(like_serializer.data,status=status.HTTP_200_OK)
     
